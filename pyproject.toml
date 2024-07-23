@@ -9,6 +9,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.111.1"
+sqlalchemy = "^2.0.31"
+pydentic = {extras = ["email"], version = "^0.0.1.dev3"}
 
 
 [build-system]
