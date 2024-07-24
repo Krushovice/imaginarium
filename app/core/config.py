@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     PROD_DB_URL: str
+    ECHO: bool = True
 
     @property
     def get_db_url(self) -> str:
