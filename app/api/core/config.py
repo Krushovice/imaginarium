@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     def get_db_url(self) -> str:
         return self.PROD_DB_URL
 
-    model_config = SettingsConfigDict(env_file="../../.env")
+    model_config = SettingsConfigDict(env_file="../../../.env")
 
 
 settings = Settings()
