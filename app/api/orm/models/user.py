@@ -1,7 +1,8 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from api.orm import Base
+
+from .base import Base
 
 
 class User(Base):
