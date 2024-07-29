@@ -1,17 +1,29 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from api.core import user_router
 
-app = FastAPI(title="Bookshelf")
+app = FastAPI(title="Bookshelf", prefix="/bookshelf")
 
 
 app.include_router(user_router)
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/")
-async def hello_index():
-    return {"Hello": "World"}
+
+templates = Jinja2Templates(directory="templates")
+
+
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse(
+        name="index.html",
+        request=request,
+    )
 
 
 if __name__ == "__main__":

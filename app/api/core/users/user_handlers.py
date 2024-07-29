@@ -1,17 +1,12 @@
-from pydantic import EmailStr, BaseModel
-
 from typing import Annotated
 
 from fastapi import APIRouter, Path
 
-from api.orm import User
+from .schemas import UserCreate
+
+# from api.orm import User
 
 router = APIRouter(prefix="/users", tags=["users"])
-
-
-class UserCreate(BaseModel):
-    email: EmailStr
-    username: str
 
 
 @router.get("/")

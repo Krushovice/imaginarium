@@ -5,4 +5,4 @@ __all__ = (
 
 
 from .config import settings
-from .handlers import router as user_router
+from .users import router as user_router
