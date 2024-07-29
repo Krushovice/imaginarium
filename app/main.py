@@ -5,12 +5,13 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from api.core import user_router
+from api.core import user_router, book_router
 
 app = FastAPI(title="Bookshelf", prefix="/bookshelf")
 
 
 app.include_router(user_router)
+app.include_router(book_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

@@ -4,6 +4,9 @@ from fastapi import APIRouter, Path
 
 from .schemas import UserCreate
 
+from . import crud
+
+
 # from api.orm import User
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -25,8 +28,4 @@ async def read_user(user_id: Annotated[int, Path(ge=0)]):
 
 @router.post("/register")
 def create_user(user: UserCreate):
-    return {
-        "message": "User created!",
-        "email": user.email,
-        "username": user.username,
-    }
+    return crud.create_user(user_in=user)
