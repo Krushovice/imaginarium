@@ -19,3 +19,14 @@ class UserCreate(UserBase):
 class User(UserBase):
     model_config = ConfigDict(from_attributes=True)
     id: int
+
+
+class UserUpdate(UserCreate):
+    pass
+
+
+class UserUpdatePartial(UserCreate):
+    username: Annotated[str, MinLen(3), MaxLen(15)] | None = None
+    first_name: Annotated[str, MinLen(3), MaxLen(15)] | None = None
+    last_name: Annotated[str, MinLen(3), MaxLen(15)] | None = None
+    email: str | None = None
