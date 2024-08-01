@@ -1,15 +1,16 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).parent.parent
 
 
 class Settings(BaseSettings):
     PROD_DB_URL: str
     ECHO: bool = True
+    DEV_DB_URL: str
 
-    @property
-    def get_db_url(self) -> str:
-        return self.PROD_DB_URL
-
-    model_config = SettingsConfigDict(env_file="../.env")
+    model_config = SettingsConfigDict(env_file=f"{BASE_DIR}.env")
 
 
 settings = Settings()

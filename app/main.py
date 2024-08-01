@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 import uvicorn
 from fastapi import FastAPI, Request
 
@@ -7,7 +9,23 @@ from fastapi.templating import Jinja2Templates
 
 from api.core import user_router, book_router
 
-app = FastAPI(title="Bookshelf", prefix="/bookshelf")
+from api.orm import Base, db_helper
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    async with db_helper.engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    yield
+
+
+app = FastAPI(
+    title="Bookshelf",
+    lifespan=lifespan,
+    prefix="/bookshelf",
+)
 
 
 app.include_router(user_router)

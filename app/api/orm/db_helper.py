@@ -1,10 +1,10 @@
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from api.orm import Base
-from .config import settings
+from api.core.config import settings
 
 
 class DataBaseHelper:
-    def __init__(self, url, echo=False):
+    def __init__(self, url: str, echo: bool = False):
         self.engine = create_async_engine(
             url=url,
             echo=echo,
@@ -18,11 +18,6 @@ class DataBaseHelper:
 
 
 db_helper = DataBaseHelper(
-    url=settings.get_db_url,
+    url=settings.DEV_DB_URL,
     echo=settings.ECHO,
 )
-
-
-async def create_tables():
-    async with db_helper.engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
