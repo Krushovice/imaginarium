@@ -1,8 +1,6 @@
-from typing import Annotated
+from fastapi import APIRouter, HTTPException, status
 
-from fastapi import APIRouter, Path
-
-from .schemas import CreateBook
+from .schemas import BookCreate, Book
 
 from . import crud
 
@@ -10,20 +8,22 @@ from . import crud
 router = APIRouter(prefix="/books", tags=["books"])
 
 
-@router.get("/")
-async def list_books():
-    return [
-        "Book1",
-        "Book2",
-        "Book3",
-    ]
+@router.get("/", response_model=list(Book))
+async def get_books(session):
+    return await crud.get_books(session=session)
 
 
-@router.get("/{book_id}")
-async def read_book(book_id: Annotated[int, Path(ge=0)]):
-    return {"book_id": book_id}
+@router.get("/{book_id}", response_model=Book)
+async def get_book(book_id: int, session):
+    book = await crud.get_book(session=session, book_id=book_id)
+    if not book:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book{book_id} not found!",
+        )
+    return book
 
 
-@router.post("/create")
-def create_book(book: CreateBook):
-    return crud.create_book(book_in=book)
+@router.post("/create", response_model=Book)
+async def create_book(book_in: BookCreate, session):
+    return await crud.create_book(book_in=book_in, session=session)
