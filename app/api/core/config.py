@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     ECHO: bool = True
     DEV_DB_URL: str
 
-    model_config = SettingsConfigDict(env_file=f"{BASE_DIR}.env")
+    model_config = SettingsConfigDict(env_file="././.env")
 
 
 settings = Settings()

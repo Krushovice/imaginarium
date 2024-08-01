@@ -31,9 +31,14 @@ class DataBaseHelper:
 
     # метод для создания сессии для каждого запроса и удаления ее после
     async def session_dependency(self) -> AsyncSession:
-        async with self.get_scope_session() as session:
+        async with self.session_factory() as session:
             yield session
-            await session.remove()
+            await session.close()
+
+    async def scoped_session_dependency(self) -> AsyncSession:
+        session = self.get_scope_session()
+        yield session
+        await session.remove()
 
 
 db_helper = DataBaseHelper(
