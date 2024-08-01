@@ -8,7 +8,7 @@ from api.orm import Book
 
 
 async def create_book(book_in: BookCreate, session: AsyncSession) -> Book:
-    book = Book(*book_in.model_dump())
+    book = Book(**book_in.model_dump())
     session.add(book)
     await session.commit()
     # await session.refresh(book)
