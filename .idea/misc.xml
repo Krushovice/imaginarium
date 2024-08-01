@@ -3,6 +3,8 @@
   <component name="Black">
     <option name="enabledOnReformat" value="true" />
     <option name="enabledOnSave" value="true" />
+    <option name="executionMode" value="BINARY" />
+    <option name="pathToExecutable" value="C:\Users\Krush\PycharmProjects\Bookshelf_site\.venv\Scripts\black.exe" />
     <option name="sdkName" value="Python 3.12 (Bookshelf_site) (2)" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (Bookshelf_site) (2)" project-jdk-type="Python SDK" />
