@@ -13,7 +13,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.111.1"
-sqlalchemy = "^2.0.31"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.31"}
 pydentic = {extras = ["email"], version = "^0.0.1.dev3"}
 alembic = "^1.13.2"
 asyncpg = "^0.29.0"
