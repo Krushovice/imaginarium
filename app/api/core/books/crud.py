@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.engine import Result
 
 
-from .schemas import BookCreate
+from .schemas import BookCreate, BookUpdate, BookUpdatePartial
 from api.orm import Book
 
 
@@ -22,5 +22,27 @@ async def get_books(session: AsyncSession) -> list[Book]:
     return list(books)
 
 
-async def get_book(book_id: int, session: AsyncSession) -> Book | None:
+async def get_book(
+    session: AsyncSession,
+    book_id: int,
+) -> Book | None:
     return await session.get(Book, book_id)
+
+
+async def update_book(
+    session: AsyncSession,
+    book: Book,
+    book_update: BookUpdate | BookUpdatePartial,
+    partial: bool = False,
+) -> Book:
+    for name, value in book_update.model_dump(exclude_unset=partial).items():
+        setattr(book, name, value)
+    await session.commit()
+    return book
+
+
+async def delete_book(
+    session: AsyncSession,
+    book: Book,
+) -> None:
+    await session.delete(book)

@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from api.core import user_router, book_router
+from api import router as api_router
 
 from api.orm import Base, db_helper
 
@@ -28,8 +28,8 @@ app = FastAPI(
 )
 
 
-app.include_router(user_router)
-app.include_router(book_router)
+app.include_router(api_router)
+
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
