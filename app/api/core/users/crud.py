@@ -3,8 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.engine import Result
 
 
-from .schemas import UserCreate, UserUpdate, UserUpdatePartial
-from api.orm import User
+from .schemas import UserCreate, UserUpdate, UserUpdatePartial, User
 
 
 async def create_user(user_in: UserCreate, session: AsyncSession) -> User:

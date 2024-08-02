@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
 )
 from asyncio import current_task
-from api.core.config import settings
+from app.api.core.config import settings
 
 
 class DataBaseHelper:

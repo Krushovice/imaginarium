@@ -4,7 +4,7 @@ from sqlalchemy.engine import Result
 
 
 from .schemas import BookCreate, BookUpdate, BookUpdatePartial
-from api.orm import Book
+from app.api.orm import Book
 
 
 async def create_book(book_in: BookCreate, session: AsyncSession) -> Book:

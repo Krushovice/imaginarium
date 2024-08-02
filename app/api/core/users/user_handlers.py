@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .schemas import UserCreate, User, UserUpdate, UserUpdatePartial
@@ -7,7 +7,7 @@ from . import crud
 
 from .dependencies import user_by_id
 
-from api.orm import db_helper
+from app.api.orm import db_helper
 
 router = APIRouter(tags=["users"])
 
