@@ -9,14 +9,9 @@ from fastapi.templating import Jinja2Templates
 
 from api import router as api_router
 
-from api.orm import Base, db_helper
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-
-    async with db_helper.engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
 
     yield
 
