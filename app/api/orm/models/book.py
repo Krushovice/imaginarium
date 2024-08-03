@@ -6,7 +6,6 @@ from .base import Base
 
 
 class Book(Base):
-    __tablename__ = "books"
 
     title: Mapped[str] = mapped_column(String(50))
     author: Mapped[str] = mapped_column(String(50))
