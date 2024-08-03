@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="db" uuid="9fbfc376-76bf-444f-947c-b527848d0350">
+    <data-source source="LOCAL" name="db [2]" uuid="5d54fddb-dd0a-4c55-bccf-3fe741581508">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Krush\PycharmProjects\Bookshelf_site\app\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\Krush\PycharmProjects\Bookshelf_site\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
