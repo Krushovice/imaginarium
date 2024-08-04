@@ -1,4 +1,4 @@
 __all__ = ("settings",)
 
 
-from .config import settings
+from app.api.config import settings
