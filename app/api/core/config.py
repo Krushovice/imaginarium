@@ -1,16 +1,25 @@
+from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
 
 
-BASE_DIR = Path(__file__).parent.parent.parent
+BASE_DIR = Path(__file__).cwd()
+
+
+class DbConfig(BaseModel):
+    prod_url: str
+    echo: bool = True
+    dev_url: str
 
 
 class Settings(BaseSettings):
-    PROD_DB_URL: str = "postrgresql+asyncpg://postgres:postgres@0.0.0.0:5432/postgres"
-    ECHO: bool = True
-    DEV_DB_URL: str = "sqlite+aiosqlite:///./db.sqlite3"
 
-    # model_config = SettingsConfigDict(env_file=f"{BASE_DIR}.env")
+    model_config = SettingsConfigDict(
+        case_sensitive=False,
+        env_file=".env",
+    )
+
+    db: DbConfig
 
 
 settings = Settings()

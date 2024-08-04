@@ -25,7 +25,7 @@ from app.api.core import settings
 
 target_metadata = Base.metadata
 
-config.set_main_option("sqlalchemy.url", settings.DEV_DB_URL)
+config.set_main_option("sqlalchemy.url", settings.db.dev_url)
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
