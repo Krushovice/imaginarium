@@ -23,5 +23,8 @@ class User(Base):
     reviews: Mapped[list["Review"]] = relationship(back_populates="user")
     profile: Mapped["Profile"] = relationship(back_populates="user")
 
+    def __str__(self):
+        return f"{self.__class__.__name__}(id={self.id!r}, username={self.username!r})"
+
     def __repr__(self) -> str:
-        return f"User(id={self.id!r}, username={self.username!r})"
+        return str(self)

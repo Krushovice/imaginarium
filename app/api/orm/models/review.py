@@ -12,5 +12,8 @@ class Review(UserRelationMixin, Base):
     title: Mapped[str] = mapped_column(String(50), unique=False)
     body: Mapped[str] = mapped_column(String(100))
 
+    def __str__(self):
+        return f"{self.__class__.__name__}(id={self.id!r}, title={self.title!r})"
+
     def __repr__(self) -> str:
-        return f"Review(id={self.id!r}, title={self.title!r}, user_id={self.user_id!r})"
+        return str(self)

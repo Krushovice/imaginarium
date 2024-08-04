@@ -13,7 +13,8 @@ class Profile(UserRelationMixin, Base):
     last_name: Mapped[str | None] = mapped_column(String(50))
     bio: Mapped[str | None]
 
+    def __str__(self):
+        return f"{self.__class__.__name__}(id={self.id!r}, title={self.user_id!r})"
+
     def __repr__(self) -> str:
-        return (
-            f"Profile(id={self.id!r}, fullname={self.first_name!r}, {self.last_name!r})"
-        )
+        return str(self)

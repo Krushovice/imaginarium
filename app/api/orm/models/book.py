@@ -11,5 +11,8 @@ class Book(Base):
     author: Mapped[str] = mapped_column(String(50))
     genre: Mapped[str] = mapped_column(String(20))
 
+    def __str__(self):
+        return f"{self.__class__.__name__}(id={self.id!r}, title={self.title!r})"
+
     def __repr__(self) -> str:
-        return f"Book(id={self.id!r}, title={self.title!r}, author={self.author!r})"
+        return str(self)
