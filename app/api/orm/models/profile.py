@@ -11,7 +11,7 @@ class Profile(UserRelationMixin, Base):
 
     first_name: Mapped[str | None] = mapped_column(String(50))
     last_name: Mapped[str | None] = mapped_column(String(50))
-    bio: Mapped[str | None]
+    favorite_genre: Mapped[str] = mapped_column(String(25), nullable=True)
 
     def __str__(self):
         return f"{self.__class__.__name__}(id={self.id!r}, title={self.user_id!r})"
