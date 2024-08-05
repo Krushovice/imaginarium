@@ -4,8 +4,9 @@ __all__ = (
     "Book",
     "Profile",
     "Review",
+    "UserBookAssociation",
     "db_helper",
 )
 
-from .models import Base, User, Book, Profile, Review
+from .models import Base, User, Book, Profile, Review, UserBookAssociation
 from .db_helper import db_helper
