@@ -24,11 +24,6 @@ class User(Base):
     reviews: Mapped[list["Review"]] = relationship(back_populates="user")
     profile: Mapped["Profile"] = relationship(back_populates="user")
 
-    books_details: Mapped[list["UserBookAssociation"]] = relationship(
-        back_populates="user",
-        cascade="all, delete-orphan",
-    )
-
     def __str__(self):
         return f"{self.__class__.__name__}(id={self.id!r}, username={self.username!r})"
 
