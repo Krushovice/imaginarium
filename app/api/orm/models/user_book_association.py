@@ -18,7 +18,7 @@ class BookStatus(Enum):
     READ: str = "read"
 
 
-class BookAssociation(Base):
+class UserBookAssociation(Base):
     __table_args__ = (
         UniqueConstraint(
             "profile_id",
