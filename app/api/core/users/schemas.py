@@ -26,29 +26,3 @@ class UserUpdate(UserCreate):
 class UserUpdatePartial(UserCreate):
     username: Annotated[str, MinLen(3), MaxLen(15)] | None = None
     email: str | None = None
-
-
-class ProfileBase(BaseModel):
-    first_name: Annotated[str, MinLen(3), MaxLen(15)] | None = None
-    last_name: Annotated[str, MinLen(3), MaxLen(15)] | None = None
-    favorite_genre: str | None = None
-
-
-class ProfileCreate(ProfileBase):
-    pass
-
-
-class Profile(ProfileBase):
-    model_config = ConfigDict(from_attributes=True)
-    id: int
-
-
-class ProfileUpdate(ProfileCreate):
-    pass
-
-
-class ProfileUpdatePartial(ProfileCreate):
-
-    first_name: Annotated[str, MinLen(3), MaxLen(15)] | None = None
-    last_name: Annotated[str, MinLen(3), MaxLen(15)] | None = None
-    favorite_genre: str | None = None
