@@ -6,10 +6,6 @@ from .schemas import (
     User,
     UserUpdate,
     UserUpdatePartial,
-    Profile,
-    ProfileCreate,
-    ProfileUpdate,
-    ProfileUpdatePartial,
 )
 
 from . import crud

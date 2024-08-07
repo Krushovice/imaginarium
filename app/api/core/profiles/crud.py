@@ -1,13 +1,12 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.engine import Result
-from sqlalchemy.orm import selectinload
 
 
 from app.api.orm import Profile
 
 
-async def create_user_profile(
+async def create_profile(
     session: AsyncSession,
     user_id: int,
     first_name: str | None,
@@ -27,24 +26,25 @@ async def create_user_profile(
     return profile
 
 
-async def update_user_profile(
+async def update_profile(
     session: AsyncSession,
     profile: Profile,
-    user_update: ProfileUpdate | ProfileUpdatePartial,
-    partial: bool = False,
+    **kwargs,
 ) -> Profile:
-    for name, value in user_update.model_dump(exclude_unset=partial).items():
+    for name, value in kwargs:
         setattr(profile, name, value)
     await session.commit()
     return profile
 
 
-async def get_user_profile(user_id: int, session: AsyncSession):
-    user = await crud.get_user(user_id, session)
-    return user.profile
+async def get_profile(profile_id: int, session: AsyncSession) -> Profile | None:
+    stmt = select(Profile).where(Profile.id == profile_id)
+    result: Result = await session.execute(stmt)
+    profile: Profile | None = result.scalar_one_or_none()
+    return profile
 
 
-async def delete_user_profile(
+async def delete_profile(
     session: AsyncSession,
     profile: Profile,
 ) -> None:

@@ -1,70 +1,70 @@
+from typing import Any
+
 from fastapi import APIRouter, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .schemas import (
-    Profile,
-    ProfileCreate,
-    ProfileUpdate,
-    ProfileUpdatePartial,
-)
-
 from . import crud
 
-from app.api.core.users.dependencies import user_by_id
 
-from app.api.orm import db_helper, User
+from app.api.orm import db_helper, Profile
 
 router = APIRouter(tags=["profiles"])
 
 
-@router.post(
-    "/{profile_id}/create_profile",
-    response_model=Profile,
-    status_code=status.HTTP_201_CREATED,
-)
-async def create_profile(
-    profile_in: ProfileCreate,
-    user: User = Depends(user_by_id),
-    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
-) -> Profile:
-    return await crud.create_user_profile(
-        user_id=user.id,
-        session=session,
-        profile_in=profile_in,
-    )
+# @router.post(
+#     "/create/",
+#     response_model=Profile,
+#     status_code=status.HTTP_201_CREATED,
+# )
+# async def create_profile(
+#     user_id: int,
+#     first_name: str | None,
+#     last_name: str | None,
+#     favorite_genre: str | None,
+#     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+# ) -> Any:
+#
+#     return await crud.create_profile(
+#         user_id=user_id,
+#         session=session,
+#         first_name=first_name,
+#         last_name=last_name,
+#         favorite_genre=favorite_genre,
+#     )
 
 
-@router.get("/{profile_id}/profile", response_model=Profile)
-async def get_user_profile(
-    user: User = Depends(user_by_id),
-) -> Profile:
-
-    return user.profile
-
-
-@router.post(
-    "/{profile_id}/update_profile",
-    response_model=Profile,
-)
-async def update_user_profile(
-    profile_update: ProfileUpdatePartial,
-    user: User = Depends(user_by_id),
+@router.get("/{profile_id}/", response_model=None)
+async def get_profile(
+    profile_id: int,
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    return await crud.update_user_profile(
+
+    return await crud.get_profile(
+        profile_id=profile_id,
         session=session,
-        profile=user.profile,
-        user_update=profile_update,
-        partial=True,
     )
+
+
+# @router.patch(
+#     "/{profile_id}/update/",
+#     response_model=Profile,
+# )
+# async def update_profile(
+#     profile: Profile,
+#     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+# ):
+#     return await crud.update_profile(
+#         session=session,
+#         profile=profile,
+#     )
 
 
 @router.delete(
     "/{profile_id}/",
     status_code=status.HTTP_204_NO_CONTENT,
 )
-async def delete_user(
-    user: User = Depends(user_by_id),
+async def delete_profile(
+    profile: Profile,
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
-):
-    await crud.delete_user_profile(session=session, profile=user.profile)
+) -> None:
+    await crud.delete_profile(session=session, profile=profile)
